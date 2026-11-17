@@ -1,7 +1,7 @@
 from datetime import datetime, timedelta
 from math import radians, sin, cos, asin, sqrt
 
-# Risk score is ordinal for ranking only; the official route tie-breakers are applied first.
+# Risk score is ordinal for ranking only the official route tie-breakers are applied first.
 RISK_SCORE = {"Low": 0, "Moderate": 1, "High": 2, "Severe": 3, "No Travel": 4}
 
 def classify(value, thresholds, no_travel=None):

@@ -8,6 +8,100 @@ from django.views.decorators.csrf import csrf_exempt
 
 from .risk import checkpoint_risk, line_distances, point_at_distance
 
+from django.views.decorators.csrf import csrf_exempt
+from .models import PushSubscription
+from .utils import send_test_notification
+
+@csrf_exempt
+def save_push_subscription(request):
+    if request.method == 'POST':
+        data = json.loads(request.body)
+        endpoint = data.get('endpoint')
+        keys = data.get('keys', {})
+        
+        # Saves directly using the default 'user_1' hardcoded value
+        subscription, created = PushSubscription.objects.update_or_create(
+            endpoint=endpoint,
+            defaults={
+                'user_id_str': 'user_1',
+                'p256dh': keys.get('p256dh'),
+                'auth': keys.get('auth'),
+            }
+        )
+        return JsonResponse({"status": "success", "user": "user_1", "created": created})
+        
+    return JsonResponse({"error": "Invalid method"}, status=400)
+
+
+
+
+
+
+@csrf_exempt
+def send_test_notification_view(request):
+    if request.method == 'POST' or request.method == 'GET':
+        try:
+            send_test_notification()
+            return JsonResponse({"status": "success", "message": "Notification trigger executed for user_1!"})
+        except Exception as e:
+            return JsonResponse({"status": "error", "message": str(e)}, status=500)
+            
+    return JsonResponse({"error": "Invalid method"}, status=400)
+
+
+
+def alert_test(request):
+
+    try:
+        # Example alert payload.
+        alert_payload = {
+            "title": "Test Alert",
+            "message": "This is a test alert from the Spotter Weather Routing API.",
+            "severity": "info",
+            "timestamp": datetime.utcnow().isoformat() + "Z",
+        }
+
+        return JsonResponse({"status": alert_payload, "message": "Alert sent successfully."})
+
+    except requests.RequestException as error:
+        traceback.print_exc()
+        return JsonResponse(
+            {"error": f"Failed to send alert: {str(error)}"},
+            status=502,
+        )
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 # 1. CONFIGURATION
 
