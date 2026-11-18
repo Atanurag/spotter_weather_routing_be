@@ -18,8 +18,6 @@ def save_push_subscription(request):
         data = json.loads(request.body)
         endpoint = data.get('endpoint')
         keys = data.get('keys', {})
-        
-        # Saves directly using the default 'user_1' hardcoded value
         subscription, created = PushSubscription.objects.update_or_create(
             endpoint=endpoint,
             defaults={
@@ -33,16 +31,12 @@ def save_push_subscription(request):
     return JsonResponse({"error": "Invalid method"}, status=400)
 
 
-
-
-
-
 @csrf_exempt
 def send_test_notification_view(request):
     if request.method == 'POST' or request.method == 'GET':
         try:
             send_test_notification()
-            return JsonResponse({"status": "success", "message": "Notification trigger executed for user_1!"})
+            return JsonResponse({"status": "success", "message": "Notification trigger  user_3"})
         except Exception as e:
             return JsonResponse({"status": "error", "message": str(e)}, status=500)
             
@@ -53,7 +47,6 @@ def send_test_notification_view(request):
 def alert_test(request):
 
     try:
-        # Example alert payload.
         alert_payload = {
             "title": "Test Alert",
             "message": "This is a test alert from the Spotter Weather Routing API.",

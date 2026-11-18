@@ -27,7 +27,6 @@ def send_test_notification():
                 subscription_info=subscription_data,
                 data=json.dumps(message_payload),
                 vapid_private_key=settings.WEBPUSH_SETTINGS["VAPID_PRIVATE_KEY"],
-                # Ensure 'sub' starts with 'mailto:'
                 vapid_claims={"sub": settings.WEBPUSH_SETTINGS["VAPID_ADMIN_EMAIL"]}
             )
             print("Push sent successfully to user_1!")
