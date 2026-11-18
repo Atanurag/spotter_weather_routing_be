@@ -7,8 +7,8 @@ def send_test_notification():
     subscriptions = PushSubscription.objects.filter(user_id_str='user_1')
     
     message_payload = {
-        "title": "push test",
-        "body": "user_3 notification received.",
+        "title": "push testing",
+        "body": "user_3 notification testing",
         "url": "/"
     }
     
@@ -29,7 +29,7 @@ def send_test_notification():
                 vapid_private_key=settings.WEBPUSH_SETTINGS["VAPID_PRIVATE_KEY"],
                 vapid_claims={"sub": settings.WEBPUSH_SETTINGS["VAPID_ADMIN_EMAIL"]}
             )
-            print("Push sent successfully to user_1!")
+            print("Push sent successfully to user3")
             success_count += 1
         except WebPushException as ex:
             print(f"Failed: {ex}")
