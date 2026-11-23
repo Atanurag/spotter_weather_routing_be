@@ -9,7 +9,7 @@ def send_test_notification():
     message_payload = {
         "title": "push testing",
         "body": "user_3 notification testing",
-        "url": "/test/t"
+        "url": "https://gogas1.iotronsys.com/alerts-dashboard?alertDate=2026-11-21&alertStationsId=%5B%5D&alertTypesId=%5B2%2C3%2C4%2C6%2C7%2C8%2C9%2C11%2C12%2C13%2C14%2C15%2C16%2C17%2C18%2C19%2C20%2C21%5D"
     }
     
     success_count = 0
