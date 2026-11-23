@@ -6,3 +6,11 @@ class PushSubscription(models.Model):
     p256dh = models.CharField(max_length=255)
     auth = models.CharField(max_length=255)
     created_at = models.DateTimeField(auto_now_add=True)
+
+
+# class NotificationLog(models.Model):
+#     user_id_str = models.CharField(max_length=255)
+#     notification_id = models.CharField(max_length=255, unique=True)
+#     title = models.CharField(max_length=255)
+#     is_read = models.BooleanField(default=False)
+#     created_at = models.DateTimeField(auto_now_add=True)

@@ -9,7 +9,7 @@ def send_test_notification():
     message_payload = {
         "title": "push testing",
         "body": "user_3 notification testing",
-        "url": "/"
+        "url": "/test/t"
     }
     
     success_count = 0
